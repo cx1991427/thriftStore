@@ -16,11 +16,11 @@ var index = require('./routes/index');
 
 var app = express();
 
-mongoose.connect('localhost:27017/shopping');
+// mongoose.connect('localhost:27017/shopping-cart');
+mongoose.connect('mongodb://cs546:1234@ds023664.mlab.com:23664/thrift-store');
 require("./config/passport");
 
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs',expressHbs({defaultLayout:'layout',extname:'.hbs'}));
 app.set('view engine', '.hbs');
 
@@ -48,6 +48,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use("uploads", express.static(path.join(__dirname, 'uploads')));
+
 
 app.use(function (req,res,next) {
   res.locals.login=req.isAuthenticated();

@@ -4,10 +4,14 @@ var csrf=require('csurf');
 var passport=require("passport");
 var Cart=require("../models/cart");
 
+var multer=require("multer");
+var upload = multer({dest: "./public/uploads"});
+
 var Product=require("../models/product");
+var mongoose=require("mongoose");
 
 var csrfProtection=csrf();
-router.use(csrfProtection);
+// router.use(csrfProtection);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,8 +21,25 @@ router.get('/', function(req, res, next) {
     for(var i=0;i<docs.length;i+=chunkSize){
       productChunks.push(docs.slice(i,i+chunkSize))
     }
-    res.render('shop/index', {title: 'Thrift Store!', products:productChunks});
+    res.render('index', {title: 'Thrift Store!', products:productChunks});
   });
+});
+
+router.get("/upload",function(req,res){
+  res.render("user/upload");
+});
+
+router.post("/upload",upload.single("avatar"),function(req,res){
+  var product=new Product({
+    imagePath:"/uploads/"+req.file.filename,
+    title:req.body.title,
+    description:req.body.description,
+    price:parseFloat(req.body.price)
+});
+  product.save(function(err,result){
+    if(err) return console.error(err);
+  });
+  res.redirect("/");
 });
 
 router.get("/add-to-cart/:id",function(req,res,next){
@@ -52,11 +73,11 @@ router.get("/checkout",function (req,res,next) {
   res.render("shop/checkout",{total:cart.totalPrice});
 });
 
-router.get("/profile",isLoggedIn,function (req,res,next) {
-  res.render("user/profile");
+router.get("/profile",isLoggedInFunction,function (req,res,next) {
+  res.render("user/profile",{"user":req.user});
 });
 
-router.get("/logout",isLoggedIn, function (req,res,next) {
+router.get("/logout",isLoggedInFunction, function (req,res,next) {
   req.logout();
   res.redirect("/");
 });
@@ -66,8 +87,9 @@ router.use("/",notLoggedIn, function (req,res,next) {
 });
 
 router.get("/signup",function(req,res,next) {
-  var messages=req.flash("error");
-  res.render('user/signup',{csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
+  var messages=req.flash("signupMessage");
+  // res.render('user/signup',{csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
+  res.render('user/signup',{messages:messages,hasErrors:messages.length>0});
 });
 
 router.post("/signup",passport.authenticate("local.signup",{
@@ -77,8 +99,9 @@ router.post("/signup",passport.authenticate("local.signup",{
 }));
 
 router.get("/signin",function (req,res,next) {
-  var messages=req.flash("error");
-  res.render('user/signin',{csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
+  var messages=req.flash("signinMessage");
+  // res.render('user/signin',{csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
+  res.render('user/signin',{messages:messages,hasErrors:messages.length>0});
 });
 
 router.post("/signin",passport.authenticate("local.signin",{
@@ -87,11 +110,17 @@ router.post("/signin",passport.authenticate("local.signin",{
   failureFlash:true
 }));
 
-
-
 module.exports = router;
 
-function isLoggedIn(req,res,next){
+
+
+
+
+
+
+
+
+function isLoggedInFunction(req,res,next){
   if(req.isAuthenticated()){
     return next();
   }
@@ -102,5 +131,5 @@ function notLoggedIn(req,res,next){
   if(!req.isAuthenticated()){
     return next();
   }
-  res.redirect();
+  res.redirect("/");
 }

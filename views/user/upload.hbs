@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <h1>Sell Your Stuff</h1>
+        <div id="charge-error" class="alert alert-danger hidden">
+
+        </div>
+
+        <form action="/upload" method="post" id="checkout-form" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">title</label>
+                        <!--<input type="text" name="title"><br>-->
+                        <input type="text" id="name" class="form-control" name="title" required>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="address">description</label>
+                        <input type="text" id="address" class="form-control" name="description" required>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="card-name">Price</label>
+                        <input type="number" id="card-name" class="form-control" name="price" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="file" name="avatar">
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<!--<script type="text/javascript" src="../../public/javascripts/checkout.js"></script>-->
+<script type="text/javascript" src="javascripts/checkout.js"></script>
