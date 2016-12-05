@@ -25,6 +25,16 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get("/about-us", function(req, res, next) 
+{
+  res.render("about-us");
+});
+
+router.get("/categories", function(req, res, next) 
+{
+  res.render("categories");
+});
+
 router.get("/upload",function(req,res){
   res.render("user/upload");
 });
