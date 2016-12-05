@@ -116,10 +116,6 @@ module.exports = router;
 
 
 
-
-
-
-
 function isLoggedInFunction(req,res,next){
   if(req.isAuthenticated()){
     return next();
