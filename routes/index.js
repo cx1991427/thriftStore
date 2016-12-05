@@ -31,7 +31,7 @@ router.get("/upload",function(req,res){
 
 router.post("/upload",upload.single("avatar"),function(req,res){
   var product=new Product({
-    imagePath:"/uploads/"+req.file.filename,
+    imagePath:"../../uploads/"+req.file.filename,
     title:req.body.title,
     description:req.body.description,
     price:parseFloat(req.body.price)
@@ -88,6 +88,7 @@ router.use("/",notLoggedIn, function (req,res,next) {
 
 router.get("/signup",function(req,res,next) {
   var messages=req.flash("signupMessage");
+  console.log(messages);
   // res.render('user/signup',{csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
   res.render('user/signup',{messages:messages,hasErrors:messages.length>0});
 });
