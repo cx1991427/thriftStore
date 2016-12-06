@@ -21,4 +21,12 @@ module.exports=function Cart(oldCart){
          }
          return arr;
      }
+
+    this.generateVoucher=function(imgAr){
+         
+        path = "/images/vouchers/";
+        var num = Math.floor( Math.random() * imgAr.length );
+        var img = imgAr[ num ];
+            return img;
+     }
 };
