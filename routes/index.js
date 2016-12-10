@@ -10,7 +10,7 @@ var upload = multer({dest: "./public/uploads"});
 var Product=require("../models/product");
 var mongoose=require("mongoose");
 
-var csrfProtection=csrf();
+// var csrfProtection=csrf();
 // router.use(csrfProtection);
 
 /* GET home page. */
