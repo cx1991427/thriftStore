@@ -130,6 +130,22 @@ router.get("/logout",isLoggedInFunction, function (req,res,next) {
   res.redirect("/");
 });
 
+router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+router.get("/auth/facebook/callback",
+    passport.authenticate("facebook",{
+      successRedirect : '/profile',
+      failureRedirect : '/'
+}));
+
+router.get('/auth/twitter', passport.authenticate('twitter'));
+
+router.get("/auth/twitter/callback",
+    passport.authenticate("twitter",{
+      successRedirect : '/profile',
+      failureRedirect : '/'
+    }));
+
 router.use("/",notLoggedIn, function (req,res,next) {
   next();
 });
