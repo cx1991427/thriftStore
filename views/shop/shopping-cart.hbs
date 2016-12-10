@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <script type="text/javascript" src="js/tota11y.min.js"></script>
+</head>
+<body>
 {{# if products}}
     <div class="row">
         <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
@@ -6,8 +16,6 @@
                     <li class="list-group-item">
                         <span class="badge">{{this.qty}}</span>
                         <strong>{{this.item.title}}</strong>
-                        
-
                         <div class="btn-group">
                             <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action<span class="caret"></span></button>
                             <ul class="dropdown-menu">
@@ -49,6 +57,8 @@
         </div>
     </div>
 {{/if}}
+</body>
+</html>
 
 
 
