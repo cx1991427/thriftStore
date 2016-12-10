@@ -13,6 +13,7 @@ module.exports = {
         'consumerKey'       : 'GUZZKmYKIc84HvETTBmqUnCWx',
         'consumerSecret'    : 'PLvV0IQoYU1qDovEHzT2DYIdLWw0iI66ES8t4P3dzeuKFAHuQq',
         'callbackURL'       : 'http://localhost:3000/auth/twitter/callback'
+        // 'callbackURL'       : "http://thriftstore.herokuapp.com/"
     },
 
     'googleAuth' : {

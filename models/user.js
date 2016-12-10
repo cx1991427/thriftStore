@@ -1,10 +1,12 @@
 var mongoose=require("mongoose");
-var Schema=mongoose.Schema;
+// var Schema=mongoose.Schema;
 var bcrypt=require("bcrypt-nodejs");
 
-var userSchema=new Schema({
-    email:{type:String,required:true},
-    password:{type:String,required:true},
+var userSchema=mongoose.Schema({
+    local:{
+        email:String,
+        password:String
+    },
     facebook:{
         id:String,
         token:String,
@@ -16,6 +18,12 @@ var userSchema=new Schema({
         toke:String,
         username:String,
         displayName:String
+    },
+    google           : {
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
     }
 });
 
