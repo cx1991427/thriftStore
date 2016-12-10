@@ -90,8 +90,27 @@ router.get("/shopping-cart",function(req,res,next){
   if(!req.session.cart){
     return res.render("shop/shopping-cart",{products:null});
   }
+
+  var voucher_images = new Array();
+         voucher_images[0] = "../images/dd-1.png";
+         voucher_images[1] = "../images/dd-2.png";
+         voucher_images[2] = "../images/mcdonalds-1.jpg";
+         voucher_images[3] = "../images/mcdonalds-2.jpg";
+         voucher_images[4] = "../images/pizza-hut-1.png";
+         voucher_images[5] = "../images/pizza-hut-2.png";
+         voucher_images[6] = "../images/subway-1.jpg";
+         voucher_images[7] = "../images/subway-2.jpg";
+         voucher_images[8] = "../images/wendys-1.jpg";
+         voucher_images[9] = "../images/wendys-2.png";
   var cart=new Cart(req.session.cart);
-  res.render("shop/shopping-cart",{products:cart.generateArray(),totalPrice:cart.totalPrice});
+  if(cart.totalPrice >= 200)
+  {
+    res.render("shop/shopping-cart",{products:cart.generateArray(),totalPrice:cart.totalPrice, voucher: cart.generateVoucher(voucher_images, "")});
+  }
+  else
+  {
+    res.render("shop/shopping-cart",{products:cart.generateArray(),totalPrice:cart.totalPrice});
+  }
 });
 
 router.get("/checkout",function (req,res,next) {
