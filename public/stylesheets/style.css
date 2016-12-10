@@ -3,7 +3,7 @@
 }
 
 .thumbnail .description {
-    color:#00A000;
+    color:#008a00;
 }
 
 .price {
@@ -36,7 +36,7 @@ ul.tab li a {
 }
 
 ul.tab li a:hover {
-    background-color: #ddd;
+    background-color: #f8f8f8;
 }
 
 ul.tab li a:focus, .active {
