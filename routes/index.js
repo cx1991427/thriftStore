@@ -41,7 +41,7 @@ router.get("/upload",function(req,res){
 
 router.post("/upload",upload.single("avatar"),function(req,res){
   var product=new Product({
-    imagePath:"/uploads/"+req.file.filename,
+    imagePath:"../../uploads/"+req.file.filename,
     title:req.body.title,
     description:req.body.description,
     price:parseFloat(req.body.price)
@@ -66,6 +66,25 @@ router.get("/add-to-cart/:id",function(req,res,next){
     res.redirect("/");
   });
 });
+
+router.get("/reduce/:id",function(req,res,next){
+   var productId=req.params.id;
+  var cart=new Cart(req.session.cart ? req.session.cart:{});
+
+  cart.reduceByOne(productId);
+  req.session.cart=cart;
+  res.redirect("/shopping-cart");
+});
+
+router.get("/remove/:id",function(req,res,next){
+   var productId=req.params.id;
+  var cart=new Cart(req.session.cart ? req.session.cart:{});
+
+  cart.removeItem(productId);
+  req.session.cart=cart;
+  res.redirect("/shopping-cart");
+});
+
 
 router.get("/shopping-cart",function(req,res,next){
   if(!req.session.cart){
@@ -111,12 +130,37 @@ router.get("/logout",isLoggedInFunction, function (req,res,next) {
   res.redirect("/");
 });
 
+router.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+router.get("/auth/facebook/callback",
+    passport.authenticate("facebook",{
+      successRedirect : '/profile',
+      failureRedirect : '/'
+}));
+
+router.get('/auth/twitter', passport.authenticate('twitter'));
+
+router.get("/auth/twitter/callback",
+    passport.authenticate("twitter",{
+      successRedirect : '/profile',
+      failureRedirect : '/'
+    }));
+
+router.get('/auth/google', passport.authenticate('google',{scope:["profile","email"]}));
+
+router.get("/auth/google/callback",
+    passport.authenticate("google",{
+      successRedirect : '/profile',
+      failureRedirect : '/'
+    }));
+
 router.use("/",notLoggedIn, function (req,res,next) {
   next();
 });
 
 router.get("/signup",function(req,res,next) {
   var messages=req.flash("signupMessage");
+  console.log(messages);
   // res.render('user/signup',{csrfToken:req.csrfToken(),messages:messages,hasErrors:messages.length>0});
   res.render('user/signup',{messages:messages,hasErrors:messages.length>0});
 });
