@@ -35,6 +35,18 @@ router.get("/categories", function(req, res, next)
   res.render("categories");
 });
 
+router.post("/search",function (req,res,next) {
+    // res.json(req.body.search_content);
+    Product.find({title:req.body.search_content},function (err,docs) {
+        var productChunks=[];
+        var chunkSize=3;
+        for(var i=0;i<docs.length;i+=chunkSize){
+            productChunks.push(docs.slice(i,i+chunkSize))
+        }
+        res.render('index', {title: 'Thrift Store!', products:productChunks});
+    });
+    });
+
 router.get("/upload",function(req,res){
   res.render("user/upload");
 });
