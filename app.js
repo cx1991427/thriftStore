@@ -37,9 +37,10 @@ app.use(cookieParser());
 
 app.use(session({
   secret:"mysupersecret",
-  resave:false,saveUninitialized:false,
+  resave:false,
+  saveUninitialized:false,
   store:new MongoStore({mongooseConnection:mongoose.connection}),
-  cookie:{maxAge:180*60*1000}
+  cookie:{maxAge:1*60*1000}
 }));
 
 //after the session initilization:

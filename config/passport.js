@@ -75,7 +75,7 @@ passport.use("local.signin",new LocalStrategy({
         }
 
         if(!user.validPassword(password)){
-            return done(null,false,{message:"Incorrect Password!!"});
+            return done(null,false,req.flash("signinMessage","Incorrect Password!"));
             // return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
         }
         return done(null,user);
