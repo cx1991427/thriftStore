@@ -164,16 +164,13 @@ router.get("/auth/twitter/callback/",
       failureRedirect : '/'
     }));
 
-<<<<<<< HEAD
 // router.get("/auth/twitter/callback",function (req,res) {
 //         res.json("test!");
 // }
 // );
 
-router.get('/auth/google', passport.authenticate('google',{scope:["profile","email"]}));
-=======
+// router.get('/auth/google', passport.authenticate('google',{scope:["profile","email"]}));
 router.get('/auth/google', passport.authenticate('google',{scope : ["profile","email"]}));
->>>>>>> c735d2204de7908541c8b8ddd4335d935b1544d9
 
 router.get("/auth/google/callback",
     passport.authenticate("google",{

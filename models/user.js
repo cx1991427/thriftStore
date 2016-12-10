@@ -32,7 +32,7 @@ userSchema.methods.encryptPassword=function(password){
 };
 
 userSchema.methods.validPassword=function(password) {
-    return bcrypt.compareSync(password,this.password);
+    return bcrypt.compareSync(password,this.local.password);
 };
 
 module.exports=mongoose.model("User",userSchema);
