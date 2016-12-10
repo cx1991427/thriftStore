@@ -30,10 +30,6 @@ router.get("/about-us", function(req, res, next)
   res.render("about-us");
 });
 
-router.get("/categories", function(req, res, next) 
-{
-  res.render("categories");
-});
 
 router.post("/search",function (req,res,next) {
     // res.json(req.body.search_content);
