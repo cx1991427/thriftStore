@@ -79,6 +79,8 @@ img.voucher-imgs {
 .voucher-amt {
     margin: auto;
     display: block;
+    width: 700px;
+    height: 500px;
 }
 
 #wrapper {
