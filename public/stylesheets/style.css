@@ -65,3 +65,8 @@ img.voucher-imgs {
     margin: 100px;
     display: block;
 }
+
+.imgholder {
+     width:304px;
+    height:228px;
+}
