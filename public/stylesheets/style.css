@@ -70,3 +70,12 @@ img.voucher-imgs {
      width:304px;
     height:228px;
 }
+
+.amt {
+    text-align: right;
+}
+
+.voucher-amt {
+    margin: auto;
+    display: block;
+}
