@@ -76,6 +76,10 @@ img.voucher-imgs {
     text-align: right;
 }
 
+.footer {
+    text-align: center;
+}
+
 .voucher-amt {
     margin: auto;
     display: block;
