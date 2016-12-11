@@ -1,3 +1,4 @@
-npm install
+how to use the code ?
+1: npm install
 
-npm start
+2: npm start
